@@ -1,13 +1,13 @@
-# graphql-ably-subscriptions
+# graphql-ably-pubsub
 
 This package implements the PubSubEngine Interface from the [graphql-subscriptions](https://github.com/apollographql/graphql-subscriptions) package and also the new AsyncIterator interface. 
 It allows you to connect your subscriptions manger to a Ably PubSub mechanism to support multiple subscription manager instances.
 
 ## Installation
 
-`npm install graphql-ably-subscriptions` 
+`npm install graphql-ably-pubsub` 
 or
-`yarn add graphql-ably-subscriptions`
+`yarn add graphql-ably-pubsub`
    
 ## Using as AsyncIterator
 
@@ -32,7 +32,7 @@ type Result {
 Now, let's create a simple `AblyPubSub` instance:
 
 ```javascript
-import { AblyPubSub } from 'graphql-ably-subscriptions';
+import { AblyPubSub } from 'graphql-ably-pubsub';
 const pubsub = new AblyPubSub();
 ```
 
@@ -91,7 +91,7 @@ export const resolvers = {
 ## Creating the Ably Client
 
 ```javascript
-import { AblyPubSub } from 'graphql-ably-subscriptions';
+import { AblyPubSub } from 'graphql-ably-pubsub';
 
 const pubSub = new AblyPubSub(options, channelName, pubSubClient)
 ```

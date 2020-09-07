@@ -1,5 +1,5 @@
 {
-  "name": "graphql-ably-subscriptions",
+  "name": "graphql-ably-pubsub",
   "version": "1.0.0",
   "description": "A graphql-subscriptions PubSub Engine using Ably",
   "main": "dist/index.js",
@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "compile": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "npm run compile",
+    "integration": "npm run compile && mocha --reporter spec --full-trace ./dist/test/integration-tests.js "
   },
   "author": "Apoorv Vardhan",
   "license": "MIT",
