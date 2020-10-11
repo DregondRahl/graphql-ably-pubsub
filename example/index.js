@@ -43,7 +43,7 @@ const resolvers = {
   },
   Query: {
       posts: () => {
-          return ["saddas"]
+          return ["random"]
       }
           
   },

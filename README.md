@@ -1,7 +1,9 @@
 # graphql-ably-pubsub
 
+[Ably](https://www.ably.io/documentation) is a pub/sub messaging platform with a suite of integrated services to deliver complete realtime functionality directly to end-users. In the context of GraphQL, we can use it to publish when a mutation is fired and subscribe to the result through a subscription query.
+
 This package implements the PubSubEngine Interface from the [graphql-subscriptions](https://github.com/apollographql/graphql-subscriptions) package and also the new AsyncIterator interface. 
-It allows you to connect your subscriptions manger to a Ably PubSub mechanism to support multiple subscription manager instances.
+It allows you to connect your subscription manger to an Ably PubSub mechanism to support multiple subscription manager instances.
 
 ## Installation
 
@@ -52,7 +54,7 @@ export const resolvers = {
 
 > Subscriptions resolvers are not a function, but an object with `subscribe` method, that returns `AsyncIterable`.
 
-Calling the method `asyncIterator` of the `AblyPubSub` instance will subscribe to the topic provided and will return an `AsyncIterator` binded to the AblyPubSub instance and listens to any event published on that topic.
+Calling the method `asyncIterator` of the `AblyPubSub` instance will subscribe to the topic provided and will return an `AsyncIterator` bound to the AblyPubSub instance and listens to any event published on that topic.
 Now, the GraphQL engine knows that `somethingChanged` is a subscription, and every time we will use `pubsub.publish` over this topic, the `AblyPubSub` will `PUBLISH` the event to all other subscribed instances and those in their turn will emit the event to GraphQL using the `next` callback given by the GraphQL engine.
 
 ```js
@@ -107,7 +109,7 @@ const options = {
 
 ### channelName (optional)
 
-If specified, this channel name is used for every trigger otherwise the trigger itself is used as the channel name also. 
+If specified, this channel name is used for every trigger otherwise the trigger itself is used as the channel name. 
 Example -
 ```javascript
 const channel = "ably-subscription-channel"
@@ -115,7 +117,7 @@ const channel = "ably-subscription-channel"
 
 ### pubSubClient (optional)
 
-If specified, then this client will be used and `options` param value will be ignored.
+If specified, then this client will be used and the `options` param value will be ignored.
 Example -
 ```javascript
 const options = {
