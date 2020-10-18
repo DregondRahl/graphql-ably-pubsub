@@ -37,7 +37,7 @@ export class PubSubAsyncIterator<T> implements AsyncIterator<T> {
     this.pushQueue = [];
     this.listening = true;
     this.eventsArray =
-    typeof eventNames === "string" ? [eventNames] : eventNames;
+      typeof eventNames === "string" ? [eventNames] : eventNames;
     this.allSubscribed = this.subscribeAll();
   }
 
@@ -60,7 +60,7 @@ export class PubSubAsyncIterator<T> implements AsyncIterator<T> {
     return this;
   }
 
-  private pullQueue: Function[];
+  private pullQueue: Array<(data: { value: unknown; done: boolean }) => void>;
   private pushQueue: any[];
   private eventsArray: string[];
   private allSubscribed: Promise<number[]>;

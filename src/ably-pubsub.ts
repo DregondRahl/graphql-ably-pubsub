@@ -2,10 +2,12 @@ import * as Ably from "ably";
 import { PubSubEngine } from "graphql-subscriptions";
 import { PubSubAsyncIterator } from "./pubsub-async-iterator";
 
+type OnMessage<T> = (message: T) => void;
+
 export class AblyPubSub implements PubSubEngine {
   constructor(
     options?,
-    channelName: string = "",
+    channelName = "",
     pubSubClient = new Ably.Realtime(options)
   ) {
     this.currentClientId = 0;
@@ -16,7 +18,7 @@ export class AblyPubSub implements PubSubEngine {
     this.pubSubClient = pubSubClient;
   }
 
-  public async publish(trigger: string, payload: Object): Promise<void> {
+  public async publish(trigger: string, payload: unknown): Promise<void> {
     const channel = this.pubSubClient.channels.get(
       this.channelName === "" || null ? trigger : this.channelName
     );
@@ -25,15 +27,15 @@ export class AblyPubSub implements PubSubEngine {
 
   public subscribe(
     trigger: string,
-    onMessage: Function,
-    options: Object = {}
+    onMessage: OnMessage<string>,
+    options: unknown = {}
   ): Promise<number> {
     const id = this.currentClientId++;
     this.subscriptionMap[id] = [trigger, onMessage];
     const channel = this.pubSubClient.channels.get(
       this.channelName === "" || null ? trigger : this.channelName
     );
-    let refs = this.subsRefsMap[trigger];
+    const refs = this.subsRefsMap[trigger];
     if (refs && refs.length > 0) {
       const newRefs = [...refs, id];
       this.subsRefsMap[trigger] = newRefs;
@@ -41,7 +43,7 @@ export class AblyPubSub implements PubSubEngine {
     } else {
       const subscriptionIds = this.subsRefsMap[trigger] || [];
       this.subsRefsMap[trigger] = [...subscriptionIds, id];
-      return new Promise<number>((resolve, reject) => {
+      return new Promise<number>((resolve) => {
         channel.subscribe(
           trigger,
           (this.subscribeFnMap[id] = (message) => {
@@ -88,14 +90,14 @@ export class AblyPubSub implements PubSubEngine {
       return;
     } // no subscribers, don't publish msg
     for (const subId of subscriptions) {
-      const [cnl, listener] = this.subscriptionMap[subId];
+      const [, listener] = this.subscriptionMap[subId];
       listener(message);
     }
   }
 
-  private subscriptionMap: { [subId: number]: [string, Function] };
+  private subscriptionMap: { [subId: number]: [string, OnMessage<unknown>] };
   private subsRefsMap: { [trigger: string]: Array<number> };
-  private subscribeFnMap: { [subId: number]: Function };
+  private subscribeFnMap: { [subId: number]: (message: any) => void };
   private pubSubClient: any;
   private currentClientId: number;
   private channelName: string;
