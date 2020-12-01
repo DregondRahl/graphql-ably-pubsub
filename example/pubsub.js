@@ -1,4 +1,4 @@
-import { AblyPubSub } from "../dist";
+import { AblyPubSub } from "graphql-ably-pubsub";
 
 const options = {
   key: "YOUR_ABLY_API_KEY",

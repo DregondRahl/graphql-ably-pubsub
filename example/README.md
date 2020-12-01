@@ -2,7 +2,6 @@
 
 This example shows the usage of this library with a basic GraphQL schema.
 
-- First build the library locally by running `npm i && npm run compile` from the root folder of this repo, which will generate the dist folder to which this example points to.
 - Add your Ably API key in the `pubsub.js` file.
 - Install the dependencies `npm i` and start the server `node -r esm index.js`.
 - Open GraphQL playground with `http://localhost:4000/graphql`.

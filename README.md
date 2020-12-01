@@ -5,6 +5,8 @@
 This package implements the PubSubEngine Interface from the [graphql-subscriptions](https://github.com/apollographql/graphql-subscriptions) package and also the new AsyncIterator interface.
 It allows you to connect your subscription manger to an Ably PubSub mechanism to support multiple subscription manager instances.
 
+Check out the [example](https://github.com/ably-labs/graphql-ably-pubsub/tree/master/example) folder for basic usage.
+
 ## Installation
 
 `npm install graphql-ably-pubsub`
