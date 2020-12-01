@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A graphql-subscriptions PubSub Engine using Ably",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ably-labs/graphql-ably-pubsub.git"
+  },
   "keywords": [
     "graphql",
     "ably",
@@ -17,7 +21,7 @@
     "lint": "eslint src/*.ts --ext ts"
   },
   "author": "Apoorv Vardhan",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@types/chai": "^4.2.12",
     "@types/chai-as-promised": "^7.1.3",
